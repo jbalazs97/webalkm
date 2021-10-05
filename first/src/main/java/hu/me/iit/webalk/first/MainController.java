@@ -20,7 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path="article/")
 
 public class MainController {
+	
+	
 	private List <ArticleDto> articles =new ArrayList<>();
+	
+
 	
 	@GetMapping (path= "", produces= MediaType.APPLICATION_PROBLEM_JSON_VALUE)
 	
@@ -30,9 +34,9 @@ public class MainController {
 	}
 	@PostMapping (path= "")
 	
-	public void newArticle(@RequestBody ArticleDto articleDto) {
-		articles.add(articleDto);
-	}
+	public void newArticle(@RequestBody @Valid ArticleDto articleDto) {
+		articles.add(articleDto); }
+		
 	
 	  private int findArticelByID(String id){
 	        int found = -1;
@@ -46,7 +50,7 @@ public class MainController {
 	    }
 	
 	  @PutMapping(path="/{id}")
-	    public void replaceArticle(@PathVariable("id") String id, @RequestBody @Valid ArticleDto articelDto){
+	    public void  replaceArticle(@PathVariable("id") String id, @RequestBody @Valid ArticleDto articelDto){
 
 	        int found = findArticelByID(id);
 
