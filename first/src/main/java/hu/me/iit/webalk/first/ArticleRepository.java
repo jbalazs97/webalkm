@@ -8,5 +8,6 @@ public interface ArticleRepository   {
 	ArticleDto getById(Long id);
     Long save();
 	void deleteById(Long id);
+	Long save(ArticleDto articleDto);
 
 }
