@@ -9,7 +9,7 @@ import java.util.List;
 public class ArticleMemoryRepository implements ArticleRepository {
     private final List<ArticleDto> articles = new ArrayList<>();
 
-    private int findArticleById(Long id) {
+    public int findArticleById(Long id) {
         int found = -1;
         for (int i = 0; i < articles.size(); i++) {
             if (articles.get(i).getTitle().equals(id)) {
@@ -28,6 +28,15 @@ public class ArticleMemoryRepository implements ArticleRepository {
     @Override
     public ArticleDto getById(Long id) {
         return null;
+        int articleByIdIndex = findArticleById(id);
+
+         if(articleByIdIndex == -1){
+             return null;
+         }
+         else{
+             return articles.get(articleByIdIndex);
+         }
+        
     }
 
     @Override
@@ -38,6 +47,7 @@ public class ArticleMemoryRepository implements ArticleRepository {
             ArticleDto foundArticle = articles.get(found);
             foundArticle.setAuthor(articleDto.getAuthor());
             foundArticle.setPages(articleDto.getPages());
+            foundArticle.setTitle(articleDto.getTitle());
         } else {
             articles.add(articleDto);
         }

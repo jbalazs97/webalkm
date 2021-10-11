@@ -27,7 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Long save(ArticleDto articleDto) {
         if (articleRepository.findAll().size() >= MAXIMUM_ARTICLE_COUNT) {
-            throw new TooMuchArticleException();
+            throw new TooMuchArticleExpection();
         }
         return articleRepository.save(articleDto);
     }
@@ -36,4 +36,10 @@ public class ArticleServiceImpl implements ArticleService {
     public void deleteById(Long id) {
         articleRepository.deleteById(id);
     }
+
+	@Override
+	public Long save() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
