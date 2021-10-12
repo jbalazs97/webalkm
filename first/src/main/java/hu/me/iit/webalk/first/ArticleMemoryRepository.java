@@ -28,14 +28,6 @@ public class ArticleMemoryRepository implements ArticleRepository {
     @Override
     public ArticleDto getById(Long id) {
         return null;
-        int articleByIdIndex = findArticleById(id);
-
-         if(articleByIdIndex == -1){
-             return null;
-         }
-         else{
-             return articles.get(articleByIdIndex);
-         }
         
     }
 
