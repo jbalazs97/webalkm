@@ -17,9 +17,12 @@ public class ServiceImpl implements Service{
         return 5;
     }
 
-    @Override
     public int callHelpAndUseReturnValue() {
-        int result = dependency.helpNoParameterReturnValue();
-        return result;
+        return dependency.helpNoParameterReturnValue();
     }
+
+    public void callHelpAndPassParameter5() {
+         dependency.helpWithParameterNoReturnValue(5);
+    }
+    
 }
