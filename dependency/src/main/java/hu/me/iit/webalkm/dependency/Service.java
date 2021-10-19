@@ -4,4 +4,5 @@ public interface Service {
     void calculate();
     int returnFive();
     int callHelpAndUseReturnValue();
+    String getImportantAbstract(String a);
 }

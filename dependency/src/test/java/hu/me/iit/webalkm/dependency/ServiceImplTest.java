@@ -69,10 +69,8 @@ void callHelpAndPassParameter5Test() {
 
     verify(dependency, times(1)).helpWithParameterNoReturnValue(captor.capture());
     assertEquals(FIVE,captor.getValue());
+   
+    }
     
-  
-    
-}
-    
-    
+   
 }

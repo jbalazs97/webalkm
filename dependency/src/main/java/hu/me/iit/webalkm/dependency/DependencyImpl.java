@@ -13,4 +13,8 @@ public class DependencyImpl implements Dependency {
     public void helpWithParameterNoReturnValue(int a) {
 
     }
+    @Override
+    public String important(String a) {
+        return  "<b>"+a+"</b>";
+    }
 }
