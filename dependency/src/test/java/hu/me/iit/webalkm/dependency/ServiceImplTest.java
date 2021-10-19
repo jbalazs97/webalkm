@@ -71,6 +71,21 @@ void callHelpAndPassParameter5Test() {
     assertEquals(FIVE,captor.getValue());
    
     }
+    @Test
+    void getImportantAbstractTest(){
+        //GIVEN
+        String testString = "abcdoklaksik";
+        String expected = "<b>abc...</b>";
+        String goal = service.getFirst3Char(testString);
+        when(dependency.important(goal)).thenReturn("<b>abc...</b>");
+
+        //WHEN
+        String result = service.getImportantAbstract(testString);
+
+        //THEN
+        verify(dependency, times(1)).important(goal);
+        assertEquals(expected, result);
+    }
     
    
 }
