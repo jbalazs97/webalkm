@@ -26,4 +26,9 @@ public class Car {
                 ", tipus='" + tipus + '\'' +
                 '}';
     }
+
+	public Object getTipus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
