@@ -1,31 +1,18 @@
 package hu.me.iit.Spring_Database;
 
-import javax.annotation.Generated;
-import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
-@EntityScan
+@Entity
 public class PeopleModel {
     @Id
-    @Generated
+    @GeneratedValue
     private Long id;
 
-    private String name;
-
-    @Min(12)
     private int age;
 
-    public PeopleModel(Long id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
-
-    public PeopleModel() {
-
-    }
+    private String name;
 
     public Long getId() {
         return id;
@@ -33,14 +20,6 @@ public class PeopleModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getAge() {
@@ -51,7 +30,27 @@ public class PeopleModel {
         this.age = age;
     }
 
-    public PeopleModel toPeople(){
-        return new PeopleModel(null,name, age);
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public PeopleModel() {
+    }
+
+
+    public PeopleModel(People people) {
+        this.age = people.getAge();
+        this.name = people.getName();
+    }
+
+
+    public PeopleModel(Long id, int age, String name) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
     }
 }

@@ -1,17 +1,15 @@
 package hu.me.iit.Spring_Database;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/people")
+@RequestMapping("people")
 public class PeopleController {
 
     private final PeopleService peopleService;
@@ -21,20 +19,33 @@ public class PeopleController {
     }
 
     @GetMapping
-    public Iterable<PeopleDTO> getAllPeople(){
-        List <PeopleDTO> peopleDTOList = new ArrayList<>();
-        for (People people:peopleService.getAllPeople()){
-            peopleDTOList.add(new PeopleDTO(people));
+    public Iterable<PeopleDto> getAllPeople() {
+        List<PeopleDto> peopleDtoList = new ArrayList<>();
+        for(People people :  peopleService.getAllPeople()){
+            peopleDtoList.add(new PeopleDto(people));
         }
-        return peopleDTOList;
+
+        return peopleDtoList;
     }
 
-    @PostMapping("/{people}")
-    public void save(@RequestBody PeopleCreateDTO model){
-        peopleService.addPeople(toPeople(model));
+    @PostMapping(produces= MediaType.APPLICATION_JSON_VALUE)
+    public PeopleDto save(@RequestBody @Valid PeopleDto peopleCreateDto){
+        return new PeopleDto(peopleService.create(peopleCreateDto.toPeople()));
     }
 
-    public PeopleModel toPeople(PeopleCreateDTO peopleCreateDTO){
-        return new PeopleModel(null, peopleCreateDTO.getName(), peopleCreateDTO.getAge());
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id){
+        peopleService.deleteById(id);
+    }
+
+    @GetMapping("/{id}")
+    public PeopleDto getById(@PathVariable("id") Long id){
+        return new PeopleDto(peopleService.getById(id));
+    }
+
+    @PutMapping
+    public void updatePeople(@RequestBody @Valid PeopleDto peopleDto){
+        peopleService.save(peopleDto.toEntity());
     }
 }
+

@@ -1,17 +1,21 @@
 package hu.me.iit.Spring_Database;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
-public class PeopleDTO {
+public class PeopleDto {
     private Long id;
     @NotEmpty
     private String name;
-    @Size(min = 18, max = 60)
+    @Min(18)
     private int age;
 
-    public PeopleDTO() {
+    public PeopleDto() {
     }
 
-    public PeopleDTO(People people) {
-
+    public PeopleDto(People people) {
+        this.id = people.getId();
+        this.name = people.getName();
+        this.age = people.getAge();
     }
 
     public Long getId() {
@@ -38,9 +42,7 @@ public class PeopleDTO {
         this.age = age;
     }
 
-    public PeopleDTO(PeopleModel people){
-        this.id = people.getId();
-        this.name = people.getName();
-        this.age = people.getAge();
+    public People toEntity(){
+        return new People(id, age, name);
     }
 }
